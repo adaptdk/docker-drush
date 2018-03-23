@@ -11,7 +11,8 @@ RUN apt-get update \
 	&& docker-php-ext-install gd opcache mbstring mysqli pdo pdo_mysql pdo_pgsql pgsql bcmath mcrypt zip bz2 mbstring pcntl xsl \
 	&& curl -fsSL -o /usr/local/bin/drush "https://github.com/drush-ops/drush/releases/download/$DRUSH_VERSION/drush.phar" \
 	&& chmod +x /usr/local/bin/drush \
-	&& drush core-status
+	&& drush @none dl registry_rebuild-7.x \
+	&& drush cc drush
 
 VOLUME ["/app"]
 WORKDIR /app
